@@ -1,0 +1,41 @@
+version: '2'
+
+
+services:
+  db:
+    image: evergreenitco/corp_website_example_mariadb
+    environment:
+        - MYSQL_ROOT_PASSWORD=P@ssw0rd$$
+        - MYSQL_DATABASE=web_counter
+        - MYSQL_USER=web_counter
+        - MYSQL_PASSWORD=P@ssw0rd!
+    ports:
+        - "3306"
+    networks:
+      back-tier:
+        aliases:
+          - mariadb
+  
+  web:
+    image: evergreenitco/corp_website_example_nginx
+    ports:
+        - "80"
+    links:
+        - php
+    networks:
+        - front-tier
+  
+  php:
+    image: evergreenitco/corp_website_example_php
+    environment:
+        - MYSQL_DATABASE=web_counter
+        - MYSQL_USER=web_counter
+        - MYSQL_PASSWORD=P@ssw0rd!
+    ports:
+        - "9000"
+    links:
+        - db
+    networks:
+        - front-tier
+        - back-tier
+
