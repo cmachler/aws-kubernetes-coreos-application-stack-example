@@ -28,7 +28,8 @@
         "containers": [
           {
             "name": "web",
-            "image": "evergreenitco/corp_website_example_nginx:1.0.1",
+            "image": "evergreenitco/corp_website_example_nginx:1.0.9",
+            "command": [ "confd-watch" ],
             "ports": [
               {
                 "containerPort": 80,
