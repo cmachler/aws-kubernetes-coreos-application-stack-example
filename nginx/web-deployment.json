@@ -28,12 +28,22 @@
         "containers": [
           {
             "name": "web",
-            "image": "evergreenitco/corp_website_example_nginx:1.0.9",
+            "image": "evergreenitco/corp_website_example_nginx:1.0.12",
             "command": [ "confd-watch" ],
             "ports": [
               {
                 "containerPort": 80,
                 "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "REDIS_HOST",
+                "value": "172.17.4.2"
+              },
+              {
+                "name": "REDIS_PORT",
+                "value": "6379"
               }
             ],
             "resources": {
