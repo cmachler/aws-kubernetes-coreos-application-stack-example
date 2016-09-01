@@ -11,20 +11,14 @@ services:
         - MYSQL_PASSWORD=P@ssw0rd!
     ports:
         - "3306"
-    networks:
-      back-tier:
-        aliases:
-          - mariadb
-  
+    
   web:
     image: evergreenitco/corp_website_example_nginx
     ports:
         - "80"
     links:
         - php
-    networks:
-        - front-tier
-  
+      
   php:
     image: evergreenitco/corp_website_example_php
     environment:
@@ -35,7 +29,4 @@ services:
         - "9000"
     links:
         - db
-    networks:
-        - front-tier
-        - back-tier
 
