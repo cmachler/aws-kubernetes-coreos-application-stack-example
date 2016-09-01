@@ -28,7 +28,7 @@
         "containers": [
           {
             "name": "db",
-            "image": "evergreenitco/corp_website_example_mariadb:1.0.0",
+            "image": "evergreenitco/corp_website_example_mariadb:1.0.2",
             "volumeMounts": [
               {
                 "mountPath": "/var/lib/mysql",
