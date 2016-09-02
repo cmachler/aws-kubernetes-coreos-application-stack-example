@@ -16,9 +16,7 @@ services:
     image: evergreenitco/corp_website_example_nginx
     ports:
         - "80"
-    links:
-        - php
-      
+
   php:
     image: evergreenitco/corp_website_example_php
     environment:
@@ -27,6 +25,5 @@ services:
         - MYSQL_PASSWORD=P@ssw0rd!
     ports:
         - "9000"
-    links:
-        - db
+
 
