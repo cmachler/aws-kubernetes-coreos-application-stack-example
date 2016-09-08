@@ -57,6 +57,10 @@
               {
                 "name": "MYSQL_PASSWORD",
                 "value": "P@ssw0rd!"
+              },
+              {
+                "name": "MYSQL_INITDB_SKIP_TZINFO",
+                "value": "yes"
               }
             ],
             "resources": {
