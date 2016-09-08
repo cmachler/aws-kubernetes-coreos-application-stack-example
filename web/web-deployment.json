@@ -39,7 +39,7 @@
             "env": [
               {
                 "name": "REDIS_HOST",
-                "value": "coreos-kube.gl2sah.0001.usw2.cache.amazonaws.com"
+                "value": "cocjhslo3oev845.gl2sah.ng.0001.usw2.cache.amazonaws.com"
               },
               {
                 "name": "REDIS_PORT",
