@@ -688,11 +688,11 @@
     "CoreOSKubeElastiCacheReplicationGroup": {
       "Type": "AWS::ElastiCache::ReplicationGroup",
       "Properties": {
-        "NumCacheClusters": "2",
+        "NumCacheClusters": "1",
         "Engine": "redis",
-        "CacheNodeType": "cache.m3.medium",
+        "CacheNodeType": "cache.t2.micro",
         "AutoMinorVersionUpgrade": "true",
-        "AutomaticFailoverEnabled": "true",
+        "AutomaticFailoverEnabled": "false",
         "EngineVersion": "2.8.24",
         "PreferredMaintenanceWindow": "sat:07:45-sat:08:45",
         "SnapshotRetentionLimit": "4",
@@ -1090,12 +1090,12 @@
       },
       "fdb5c397-6a48-4214-ac07-e53630b0115a": {
         "source": {
-          "id": "d913c7c6-fe9a-4806-bc8e-e59510e0377a"
-        },
-        "target": {
           "id": "056ad54b-39bf-48ce-889d-9245e711ceea"
         },
-        "z": 1
+        "target": {
+          "id": "d913c7c6-fe9a-4806-bc8e-e59510e0377a"
+        },
+        "z": 0
       },
       "1ffe1e0c-55c2-4008-8771-194a882df187": {
         "source": {

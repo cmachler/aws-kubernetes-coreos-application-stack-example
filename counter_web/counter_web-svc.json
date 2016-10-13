@@ -1,0 +1,29 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "nginx-counter-frontend",
+    "creationTimestamp": null,
+    "labels": {
+      "service": "nginx-counter-frontend"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "80",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 80,
+        "nodePort": 30100
+      }
+    ],
+    "selector": {
+      "service": "nginx-counter-frontend"
+    },
+    "type": "LoadBalancer"
+  },
+  "status": {
+    "loadBalancer": {}
+  }
+}

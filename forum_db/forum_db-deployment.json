@@ -1,0 +1,84 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "postgres-forum",
+    "creationTimestamp": null,
+    "labels": {
+      "service": "postgres-forum"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "service": "postgres-forum"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "service": "postgres-forum",
+          "app": "postgres",
+          "tier": "backend"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "postgres-forum",
+            "image": "evergreenitco/corp_website_forum_postgres:2.0.0",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/postgresql/data",
+                "name": "forum-db-pd"
+              }
+            ],
+            "ports": [
+              {
+                "containerPort": 5432,
+                "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "POSTGRES_PASSWORD",
+                "value": "P@ssw0rd!"
+              },
+              {
+                "name": "POSTGRES_DB",
+                "value": "forum"
+              },
+              {
+                "name": "POSTGRES_USER",
+                "value": "forum"
+              }
+            ],
+            "resources": {
+                "requests": {
+			"memory": "64Mi",
+			"cpu": "0.2"
+		},
+		"limits": {
+			"memory": "128Mi",
+			"cpu": "0.4"
+		}
+            }
+          }
+        ],
+        "volumes": [
+          {
+            "name": "forum-db-pd",
+            "persistentVolumeClaim": {
+		"claimName": "forum-db-nfs-pvc"
+	    }
+          }
+        ],
+        "restartPolicy": "Always"
+      }
+    },
+    "strategy": {}
+  },
+  "status": {}
+}

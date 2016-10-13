@@ -1,0 +1,92 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "mariadb-counter",
+    "creationTimestamp": null,
+    "labels": {
+      "service": "mariadb-counter"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "service": "mariadb-counter"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "service": "mariadb-counter",
+          "app": "mariadb",
+          "tier": "backend"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "mariadb-counter",
+            "image": "evergreenitco/corp_website_example_mariadb:1.0.2",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/mysql",
+                "name": "counter-db-pd"
+              }
+            ],
+            "ports": [
+              {
+                "containerPort": 3306,
+                "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "MYSQL_ROOT_PASSWORD",
+                "value": "P@ssw0rd$"
+              },
+              {
+                "name": "MYSQL_DATABASE",
+                "value": "web_counter"
+              },
+              {
+                "name": "MYSQL_USER",
+                "value": "web_counter"
+              },
+              {
+                "name": "MYSQL_PASSWORD",
+                "value": "P@ssw0rd!"
+              },
+              {
+                "name": "MYSQL_INITDB_SKIP_TZINFO",
+                "value": "yes"
+              }
+            ],
+            "resources": {
+                "requests": {
+			"memory": "64Mi",
+			"cpu": "0.2"
+		},
+		"limits": {
+			"memory": "128Mi",
+			"cpu": "0.4"
+		}
+            }
+          }
+        ],
+        "volumes": [
+          {
+            "name": "counter-db-pd",
+            "persistentVolumeClaim": {
+		"claimName": "counter-db-nfs-pvc"
+	    }
+          }
+        ],
+        "restartPolicy": "Always"
+      }
+    },
+    "strategy": {}
+  },
+  "status": {}
+}

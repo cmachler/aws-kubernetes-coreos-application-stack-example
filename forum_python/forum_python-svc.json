@@ -1,0 +1,27 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "python-forum",
+    "creationTimestamp": null,
+    "labels": {
+      "service": "python-forum"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "9090",
+        "protocol": "TCP",
+        "port": 9090,
+        "targetPort": 9090
+      }
+    ],
+    "selector": {
+      "service": "python-forum"
+    }
+  },
+  "status": {
+    "loadBalancer": {}
+  }
+}

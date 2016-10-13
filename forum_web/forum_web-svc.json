@@ -1,0 +1,28 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "nginx-forum-frontend",
+    "creationTimestamp": null,
+    "labels": {
+      "service": "nginx-forum-frontend"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "80",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 80
+      }
+    ],
+    "selector": {
+      "service": "nginx-forum-frontend"
+    },
+    "type": "LoadBalancer"
+  },
+  "status": {
+    "loadBalancer": {}
+  }
+}

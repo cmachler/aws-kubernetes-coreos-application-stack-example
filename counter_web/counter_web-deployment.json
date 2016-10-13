@@ -1,0 +1,67 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "nginx-counter-frontend",
+    "creationTimestamp": null,
+    "labels": {
+      "service": "nginx-counter-frontend"
+    }
+  },
+  "spec": {
+    "replicas": 2,
+    "selector": {
+      "matchLabels": {
+        "service": "nginx-counter-frontend"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "service": "nginx-counter-frontend",
+          "app": "counter",
+          "tier": "frontend"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "nginx-counter-frontend",
+            "image": "evergreenitco/corp_website_example_nginx:2.0.1",
+            "command": [ "confd-watch" ],
+            "ports": [
+              {
+                "containerPort": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "REDIS_HOST",
+                "value": "coc1qctxl89ty7d4.gl2sah.ng.0001.usw2.cache.amazonaws.com"
+              },
+              {
+                "name": "REDIS_PORT",
+                "value": "6379"
+              }
+            ],
+            "resources": {
+                "requests": {
+			"memory": "64Mi",
+			"cpu": "0.2"
+		},
+		"limits": {
+			"memory": "128Mi",
+			"cpu": "0.4"
+		}
+            }
+          }
+        ],
+        "restartPolicy": "Always"
+      }
+    },
+    "strategy": {}
+  },
+  "status": {}
+}

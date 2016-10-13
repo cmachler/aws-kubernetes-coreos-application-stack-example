@@ -1,0 +1,74 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "python-forum",
+    "creationTimestamp": null,
+    "labels": {
+      "service": "python-forum"
+    }
+  },
+  "spec": {
+    "replicas": 2,
+    "selector": {
+      "matchLabels": {
+        "service": "python-forum"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "service": "python-forum",
+          "app": "forum",
+          "tier": "frontend"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "python-forum",
+            "image": "evergreenitco/corp_website_forum_python:2.0.1",
+            "ports": [
+              {
+                "containerPort": 9090,
+                "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "POSTGRES_PASSWORD",
+                "value": "P@ssw0rd!"
+              },
+              {
+                "name": "POSTGRES_DB",
+                "value": "forum"
+              },
+              {
+                "name": "POSTGRES_USER",
+                "value": "forum"
+              },
+              {
+                "name": "COUNTER_DNS",
+                "value": "counter.evergreenitco.com"
+              }
+            ],
+            "resources": {
+                "requests": {
+			"memory": "64Mi",
+			"cpu": "0.2"
+		},
+		"limits": {
+			"memory": "128Mi",
+			"cpu": "0.4"
+		}
+            }
+          }
+        ],
+        "restartPolicy": "Always"
+      }
+    },
+    "strategy": {}
+  },
+  "status": {}
+}
